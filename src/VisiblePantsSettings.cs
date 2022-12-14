@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RimWorld;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
@@ -27,10 +28,13 @@ namespace VisiblePants
         {
             Scribe_Values.Look(ref drawPantsOver, "drawPantsOver", true);
             base.ExposeData();
-
-            foreach (var key in VisiblePantsUtility.NeedsRedraw.Keys.ToList())
+            foreach (var pawn in PawnsFinder.AllMapsWorldAndTemporary_AliveOrDead)
             {
-                VisiblePantsUtility.NeedsRedraw[key] = true;
+                if (pawn.apparel != null)
+                {
+                    pawn.apparel.SortWornApparelIntoDrawOrder();
+                    pawn.apparel.Notify_ApparelChanged();
+                }
             }
         }
     }
