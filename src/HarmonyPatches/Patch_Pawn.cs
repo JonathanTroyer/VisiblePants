@@ -7,8 +7,8 @@ namespace VisiblePants
     public static class Patch_Pawn
     {
         [HarmonyPatch(typeof(Pawn))]
-        [HarmonyPatch(nameof(Pawn.Tick))]
-        public static class Patch_Tick
+        [HarmonyPatch(nameof(Pawn.TickRare))]
+        public static class Patch_TickRare
         {
             // Redraw pawn apparel if settings have changed
             public static void Postfix(Pawn __instance)
